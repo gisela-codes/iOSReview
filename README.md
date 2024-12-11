@@ -2,7 +2,11 @@
 ## Jump To:
 - [View Controller](#vc)
 - [Table View Delegates](#tb)
+- [Creating a Store](#creating-a-store)
+- [User Input Data](#user-input-data)
+- [Segue](#segue)
 - [API](#apis-d)
+
 ## 1. Format Layout in Main
 <img src="main.png" width="400">
 
@@ -84,4 +88,82 @@ override func viewWillAppear(_ animated: Bool) {
     tableView.reloadData()
 }
 ```
+## Creating a Store
+### a. class within the store
+```swift 
+import UIKit
+
+class Affirmation: Equatable {
+    var quote: String?
+    var date: Date
+    
+    init(Quote: String?) {
+        self.quote = Quote
+        self.date = Date()
+    }
+    
+    static func ==(lhs: Affirmation, rhs: Affirmation) -> Bool{
+        return lhs.quote == rhs.quote
+        && lhs.date == rhs.date
+    }
+    
+}
+```
+### b. Affirmation Store
+contains a list of Affirmations
+``` swift 
+import UIKit
+class AffirmationStore {
+    //uncomment this later
+    //var AffirmationStore = [Affirmation]()
+    var allAffirmations: [Affirmation] = [
+            Affirmation(Quote: "I will pass this final"),
+            Affirmation(Quote: "I am capable of great things"),
+            Affirmation(Quote: "Every day I grow stronger")
+    ]
+
+    @discardableResult func createAffirmation(quote: String) -> Affirmation {
+        let newAff = Affirmation(Quote: quote)
+        allAffirmations.append(newAff)
+        print(allAffirmations)
+        return newAff
+    }
+}
+```
+### c. Declare Store in ViewController
+<img src="store.png"> 
+
+### d. Instantiate Store in SceneDelegate
+``` swift
+let affirmationStore = AffirmationStore()
+let navController = window!.rootViewController as! UINavigationController
+let affirmationController = navController.topViewController as! AffirmationViewController
+affirmationController.AffirmationStore = affirmationStore
+```
+### e. Update VC to include Store data
+<img src="storeData.png"> 
+
+**Our outcome should be the same as the test Data**
+
+## User Input Data
+- Create VC Class and connect respective outlets
+- In the main VC add a create function
+``` swift
+func addAffirmation(quote: String) {
+        let newAffirmation = affirmationStore.createAffirmation(quote: quote)
+        // Get the index of the new affirmation
+        let newIndexPath = IndexPath(row: affirmationStore.allAffirmations.count - 1, section: 0)
+
+        // Insert the new row into the table view
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+```
+## Segue
+<img src="segue.png"> 
+
 ## API's :D
+**TEST WITH POSTMAN OR ELSE >:(**
+
+<img src="postman.png" height="200"> 
+
+*Note: I have to invoke this call everytime I want a random quote
