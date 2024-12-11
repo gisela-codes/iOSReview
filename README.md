@@ -20,3 +20,5 @@ class AffirmationViewController: UIViewController {
 ## b. Add custom class to storyboard VC's (View Controllers)
 <img src="class.png" width="300">
 
+## c. Connect to outlets
+<img src="connections.png">
