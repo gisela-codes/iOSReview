@@ -2,6 +2,7 @@
 ## Jump To:
 - [View Controller](#vc)
 - [Table View Delegates](#tb)
+- [API](#apis-d)
 ## 1. Format Layout in Main
 <img src="main.png" width="400">
 
@@ -36,6 +37,10 @@ class ItemCell: UITableViewCell {
 <img src="connections.png">
 
 ## <a name="tb"></a>TableView Delegates
+<img src="testData.png" height="200"> 
+
+### Start with test data
+
 For my data, I will start small by having 3 records
 ```swift
 //a list of tuples
@@ -43,17 +48,18 @@ var affirmations: [(date: String, text: String)] = [
         ("12/4", "I will pass this final"),
         ("12/5", "I am capable of great things"),
         ("12/6", "Every day I grow stronger")
-    ]
+]
 ```
 ### numberOfRowsInSection
-//  the amount of rows
+The amount of rows in the TableView
 ```swift 
-//  the amount of rows (3 in this case)
+//  affirmations.count (returns 3)
 override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return affirmations.count
-    }
+}
 ```
 ### cellForRowAt
+What is being contained within the cell
 ```swift
 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     // tb view cell has the identifier 'AffirmationCell', type cast it as a cell
@@ -61,9 +67,21 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
     "AffirmationCell", for: indexPath) as! AffirmationCell
 
     let affirmation = affirmations[indexPath.row]
-
+    //the label's outlets are defined in AffirmationCell
     cell.DateLabel.text = affirmation.date
     cell.SentenceLabel.text = affirmation.text
     return cell
-    }
+}
 ```
+### Additional Things to Include
+``` swift
+override func viewDidLoad() {
+        super.viewDidLoad()
+}
+
+override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tableView.reloadData()
+}
+```
+## API's :D
