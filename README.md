@@ -1,9 +1,12 @@
 # iOS Review
-
+## Jump To:
+- [View Controller](#vc)
 ## 1. Format Layout in Main
 <img src="main.png" width="400">
 
-## 2. Create ViewController Classes
+**Nav Controller should be set as 'Is Inital View Controller'*
+
+## <a name="vc"></a>2. Create ViewController Classes
 
 ### a. Define classes
 ```swift
