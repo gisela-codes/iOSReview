@@ -165,5 +165,5 @@ func addAffirmation(quote: String) {
 **TEST WITH POSTMAN OR ELSE >:(**
 
 <img src="postman.png" height="200"> 
-
+https://www.affirmations.dev/
 *Note: I have to invoke this call everytime I want a random quote
